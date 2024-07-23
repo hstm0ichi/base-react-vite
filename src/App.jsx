@@ -10,24 +10,11 @@ const App = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  const [todoList, setTodoList] = useState([
-    {
-      id: randomIntFromInterval(1, 10000000),
-      name: "Learning ReactJS"
-    },
-    {
-      id: randomIntFromInterval(1, 10000000),
-      name: "Watching Youtube"
-    }
-  ]);
-
-  const stm = "STM";
-  const age = 25;
-  const data = {
-    address: "Quy Nhon",
-    country: "Viet Nam"
-  }
+  const [todoList, setTodoList] = useState([]);
   const addNewToDo = (name) => {
+    if (name === "") {
+      return;
+    }
     const newTodo = {
       id: randomIntFromInterval(1, 10000000),
       name: name
@@ -45,9 +32,6 @@ const App = () => {
           addNewToDo={addNewToDo}
         />
         <TodoData
-          name={stm}
-          age={age}
-          data={data}
           todoList={todoList}
         />
         <div className='todo-image'>
