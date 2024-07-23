@@ -11,6 +11,7 @@ const App = () => {
   }
 
   const [todoList, setTodoList] = useState([]);
+
   const addNewToDo = (name) => {
     if (name === "") {
       return;
@@ -22,6 +23,11 @@ const App = () => {
 
     setTodoList([...todoList, newTodo]);
 
+  }
+
+  const deleteTodo = (id) => {
+    const newTodoList = todoList.filter(item => item.id !== id);
+    setTodoList(newTodoList);
   }
 
   return (
@@ -36,6 +42,7 @@ const App = () => {
           <>
             <TodoData
               todoList={todoList}
+              deleteTodo={deleteTodo}
             />
           </>
           :
