@@ -5,13 +5,18 @@ import TodoNew from './components/todo/TodoNew';
 import { useState } from 'react';
 
 const App = () => {
+
+  const randomIntFromInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   const [todoList, setTodoList] = useState([
     {
-      id: 1,
+      id: randomIntFromInterval(1, 10000000),
       name: "Learning ReactJS"
     },
     {
-      id: 2,
+      id: randomIntFromInterval(1, 10000000),
       name: "Watching Youtube"
     }
   ]);
@@ -23,7 +28,13 @@ const App = () => {
     country: "Viet Nam"
   }
   const addNewToDo = (name) => {
-    alert(`Call me ${name}`);
+    const newTodo = {
+      id: randomIntFromInterval(1, 10000000),
+      name: name
+    }
+
+    setTodoList([...todoList, newTodo]);
+
   }
 
   return (
