@@ -1,8 +1,11 @@
+import './MyComponent.css';
+
 const MyComponent = () => {
     return (
-        <div>
-            STM
-        </div>
+        <>
+            <div className="">STM</div>
+            <div className="child">Child</div>
+        </>
     );
 }
 
