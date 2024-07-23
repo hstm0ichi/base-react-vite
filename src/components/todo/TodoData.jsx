@@ -1,5 +1,6 @@
 const TodoData = (props) => {
-    const { name, age, data } = props;
+    const { name, age, data, addNewToDo } = props;
+
     return (
         <>
             <div className='todo-data'>
