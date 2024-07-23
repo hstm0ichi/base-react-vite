@@ -2,6 +2,8 @@ import './components/todo/todo.css';
 import reactLogo from './assets/react.svg'
 import TodoData from './components/todo/TodoData';
 import TodoNew from './components/todo/TodoNew';
+import Header from "./components/layout/header";
+import Footer from "./components/layout/footer";
 import { useState } from 'react';
 
 const App = () => {
@@ -32,6 +34,7 @@ const App = () => {
 
   return (
     <>
+    <Header/>
       <div className="todo-container">
         <div className="todo-title">Todo List</div>
         <TodoNew
@@ -54,6 +57,7 @@ const App = () => {
         }
 
       </div>
+      <Footer/>
     </>
   )
 }
