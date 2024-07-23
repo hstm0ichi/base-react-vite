@@ -1,9 +1,10 @@
 import './MyComponent.css';
 
 const MyComponent = () => {
+    const stm = "STM";
     return (
         <>
-            <div className="">STM</div>
+            <div className="">{stm}</div>
             <div className="child">Child</div>
         </>
     );
