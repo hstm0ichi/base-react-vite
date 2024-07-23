@@ -1,8 +1,8 @@
 {
-  "name": "base-react-vite-hoidanit",
+  "name": "base-react-vite",
   "author": {
-    "name": "Hỏi Dân IT & Eric",
-    "url": "https://hoidanit.vn"
+    "name": "QuyPN2",
+    "email": "stngocquynew@gmail.com"
   },
   "private": true,
   "version": "0.0.1",
