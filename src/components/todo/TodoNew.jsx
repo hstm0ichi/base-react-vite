@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 const TodoNew = (props) => {
-    const [valueInput, setValueInput] = useState("STM");
+    const [valueInput, setValueInput] = useState("");
     const { addNewToDo } = props;
 
     const handleClick = () => {
         addNewToDo(valueInput);
+        setValueInput("");
     }
 
     const handleOnChange = (name) => {
@@ -17,6 +18,7 @@ const TodoNew = (props) => {
             <div className='todo-new'>
                 <input type="text"
                     onChange={() => { handleOnChange(event.target.value) }}
+                    value={valueInput}
                 />
                 <button
                     onClick={handleClick}
