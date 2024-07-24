@@ -2,21 +2,31 @@ import UserForm from "../components/user/user.form";
 import UserTable from "../components/user/user.table";
 import { useEffect, useState } from 'react';
 import { fetchAllUsersAPI } from "../services/api.service";
-const UsersPage = () => {
+const UserPage = () => {
+
     const [dataUsers, setDataUsers] = useState([]);
 
-    useEffect(() => { loadUsers() }, []);
+    //empty array => run once
+    useEffect(() => {
+        loadUsers();
+    }, []);
 
     const loadUsers = async () => {
-        const response = await fetchAllUsersAPI();
-        setDataUsers(response.data);
+        const res = await fetchAllUsersAPI()
+        setDataUsers(res.data)
     }
 
+
+    // lift-up state 
     return (
         <div style={{ padding: "20px" }}>
             <UserForm loadUsers={loadUsers} />
-            <UserTable dataUsers={dataUsers} />
+            <UserTable
+                dataUsers={dataUsers}
+                loadUsers={loadUsers}
+            />
         </div>
     )
 }
-export default UsersPage;
+
+export default UserPage;

@@ -4,7 +4,7 @@ import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
 
 const UserTable = (props) => {
-    const { dataUsers } = props;
+    const { dataUsers, loadUsers } = props;
 
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
 
@@ -27,6 +27,10 @@ const UserTable = (props) => {
         {
             title: 'Email',
             dataIndex: 'email',
+        },
+        {
+            title: 'Phone Number',
+            dataIndex: 'phone',
         },
         {
             title: 'Action',
@@ -57,7 +61,9 @@ const UserTable = (props) => {
                 setIsModalUpdateOpen={setIsModalUpdateOpen}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
+                loadUsers={loadUsers}
             />
+
         </>
     )
 }
