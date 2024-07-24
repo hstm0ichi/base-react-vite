@@ -6,7 +6,7 @@ import ViewUserDetail from './view.user.detail';
 import { deleteUserAPI } from "../../services/api.service";
 
 const UserTable = (props) => {
-    const { dataUsers, loadUsers, current, pageSize, total, setCurrent, setPageSize, setTotal } = props;
+    const { dataUsers, loadUsers, current, pageSize, total, setCurrent, setPageSize } = props;
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
     const [dataDetail, setDataDetail] = useState(null);
@@ -14,13 +14,15 @@ const UserTable = (props) => {
 
     const columns = [
         {
-            title: "No.",
+            title: "STT",
             render: (_, record, index) => {
+                console.log(">>> check index: ", index)
                 return (
-                    <>{index + 1}</>
+                    <>{(index + 1) + (current - 1) * pageSize}</>
                 )
-            },
+            }
         },
+
         {
             title: 'Id',
             dataIndex: '_id',
@@ -96,8 +98,22 @@ const UserTable = (props) => {
     }
 
     const onChange = (pagination, filters, sorter, extra) => {
+        // setCurrent, setPageSize
+        //nếu thay đổi trang : current
+        if (pagination && pagination.current) {
+            if (+pagination.current !== +current) {
+                setCurrent(+pagination.current) //"5" => 5
+            }
+        }
 
+        //nếu thay đổi tổng số phần tử : pageSize
+        if (pagination && pagination.pageSize) {
+            if (+pagination.pageSize !== +pageSize) {
+                setPageSize(+pagination.pageSize) //"5" => 5
+            }
+        }
     };
+
 
     return (
         <>
