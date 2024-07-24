@@ -1,4 +1,4 @@
-import { Drawer } from 'antd';
+import { Button, Drawer } from 'antd';
 
 const ViewUserDetail = (props) => {
     const {
@@ -8,7 +8,9 @@ const ViewUserDetail = (props) => {
         setIsDetailOpen
     } = props;
     return (
-        <Drawer title="Chi tiết User"
+        <Drawer
+            width={"40vw"}
+            title="Chi tiết User"
             onClose={() => {
                 setDataDetail(null);
                 setIsDetailOpen(false);
@@ -25,13 +27,43 @@ const ViewUserDetail = (props) => {
                     <p>Email: {dataDetail.email}</p>
                     <br />
                     <p>Phone number: {dataDetail.phone}</p>
+                    <br />
+                    <p>Avatar:</p>
+                    <div>
+                        <img
+                            height={"200px"}
+                            width={"200px"}
+                            src={`${import.meta.env.VITE_BASE_URL}/images/avatar/${dataDetail.avatar}`}
+                            alt=""
+                        />
+                    </div>
+                    <br />
+                    <div>
+                        <label htmlFor='btnUpload' style={{
+                            display: "block",
+                            width: "fit-content",
+                            marginTop: "15px",
+                            padding: "5px 10px",
+                            background: "orange",
+                            borderRadius: "5px",
+                            cursor: "pointer",
+                        }}>
+                            Upload Avatar</label>
+                        <input type="file" hidden id="btnUpload" />
+                    </div>
+                    <br />
+                    {/* <Button type='primary'>
+                        Upload Avatar
+                    </Button>
+                    <br /> */}
+
                 </>
                 :
                 <>
                     <p>Không có dữ liệu</p>
                 </>
             }
-        </Drawer>
+        </Drawer >
     )
 }
 
