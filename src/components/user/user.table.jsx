@@ -67,7 +67,7 @@ const UserTable = (props) => {
             ),
         },
     ];
-    const cancel = (e) => {
+    const cancel = () => {
         message.warning('Chill Man, you clicked cancel, so we don\'t delete that user!');
     };
 
@@ -82,7 +82,7 @@ const UserTable = (props) => {
         } else {
             notification.error({
                 message: "Error delete user",
-                description: JSON.stringify(res.message)
+                description: JSON.stringify(response.message)
             })
         }
     }

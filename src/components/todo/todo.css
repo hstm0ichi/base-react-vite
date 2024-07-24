@@ -1,14 +1,49 @@
 .todo-container {
     margin: 50px auto;
-    width: 600px;
+    width: 100%;
 }
 
 .todo-title {
-    font-size: 35px;
+    font-size: 3em;
     margin: 15px 0;
     color: red;
     text-align: center;
     font-weight: 600;
+}
+
+#todo-input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+#todo-input:focus {
+    border: #61dbfb 1.5px solid;
+    outline: none;
+    box-shadow: 0 0 2px 1px #61dbfb;
+}
+
+#todo-button {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    background-color: #61dbfb;
+    color: white;
+}
+
+#todo-button:hover {
+    border: #61dbfb 1.5px solid;
+    outline: none;
+    box-shadow: 0 0 2px 1px #61dbfb;
+}
+
+#todo-button:active {
+    background-color: white;
+    color: #61dbfb;
+    border: #61dbfb 1.5px solid;
 }
 
 .todo-new {
@@ -39,8 +74,8 @@
 }
 
 .logo {
-    height: 6em;
-    padding: 1.5em;
+    height: 15em;
+    padding: 2em;
     will-change: filter;
     transition: filter 300ms;
 }
