@@ -72,8 +72,9 @@ const ViewUserDetail = (props) => {
 
     return (
         <Drawer
-            width={"40vw"}
+            width={"auto"}
             title="Chi tiết User"
+            style={{ padding: "20px", placeItems: "center" }}
             onClose={() => {
                 setDataDetail(null);
                 setIsDetailOpen(false);
