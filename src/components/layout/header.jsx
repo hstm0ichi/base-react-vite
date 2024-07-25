@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import { UsergroupAddOutlined, HomeOutlined, AuditOutlined } from '@ant-design/icons';
+import { HomeOutlined, AuditOutlined, SettingOutlined, LoginOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
         {
             label: <Link to={"/users"}>Users</Link>,
             key: 'users',
-            icon: <UsergroupAddOutlined />
+            icon: <UserOutlined />
         },
         {
             label: <Link to={"/books"}>Books</Link>,
@@ -27,6 +27,24 @@ const Header = () => {
             icon: <AuditOutlined />,
 
         },
+        {
+            label: 'Cài đặt',
+            key: 'setting',
+            icon: <SettingOutlined />,
+            children: [
+                {
+                    label: <Link to={"/login"}>Đăng nhập</Link>,
+                    key: 'login',
+                    icon: <LoginOutlined />,
+                },
+                {
+                    label: 'Đăng xuất',
+                    key: 'logout',
+                    icon: <LogoutOutlined />,
+                },
+            ],
+
+        }
 
     ];
 
