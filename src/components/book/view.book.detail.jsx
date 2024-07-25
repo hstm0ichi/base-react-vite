@@ -1,16 +1,14 @@
 import { Button, Drawer, notification } from 'antd';
 import { useState } from 'react';
-import { handleUploadFile, updateUserAvatarAPI } from '../../services/api.service';
+import { handleUploadFile, updateBookThumbnailAPI } from '../../services/api.service';
 
-
-const ViewUserDetail = (props) => {
-
+const ViewBookDetail = (props) => {
     const {
         dataDetail,
         setDataDetail,
         isDetailOpen,
         setIsDetailOpen,
-        loadUsers
+        loadBooks
     } = props;
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -32,31 +30,30 @@ const ViewUserDetail = (props) => {
         }
     }
 
-    const handleUpdateUserAvatar = async () => {
+    const handleUpdateBookThumbnail = async () => {
         //step 1: upload file
-        const resUpload = await handleUploadFile(selectedFile, "avatar");
+        const resUpload = await handleUploadFile(selectedFile, "book");
         if (resUpload.data) {
             //success
-            const newAvatar = resUpload.data.fileUploaded;
+            const newThumbnail = resUpload.data.fileUploaded;
             //step 2: update user
-            const resUpdateAvatar = await updateUserAvatarAPI(
-                newAvatar, dataDetail._id, dataDetail.fullName, dataDetail.phone
-            );
+            const resUpdateAvatar = await updateBookThumbnailAPI(
+                newThumbnail, dataDetail._id, dataDetail.mainText, dataDetail.author, dataDetail.price, dataDetail.quantity, dataDetail.category)
 
             if (resUpdateAvatar.data) {
                 setIsDetailOpen(false);
                 setSelectedFile(null);
                 setPreview(null);
-                await loadUsers();
+                await loadBooks();
 
                 notification.success({
-                    message: "Update user avatar",
-                    description: "Cập nhật avatar thành công"
+                    message: "Update book thumbnail",
+                    description: "Cập nhật thumbnail thành công"
                 })
 
             } else {
                 notification.error({
-                    message: "Error update avatar",
+                    message: "Error update book thumbnail",
                     description: JSON.stringify(resUpdateAvatar.message)
                 })
             }
@@ -67,14 +64,13 @@ const ViewUserDetail = (props) => {
                 description: JSON.stringify(resUpload.message)
             })
         }
-    }
 
+    }
 
     return (
         <Drawer
             width={"auto"}
-            title="Chi tiết User"
-            style={{ padding: "20px", alignItems: "center" }}
+            title="Chi tiết Book"
             onClose={() => {
                 setDataDetail(null);
                 setIsDetailOpen(false);
@@ -84,23 +80,29 @@ const ViewUserDetail = (props) => {
             {dataDetail ? <>
                 <p>Id: {dataDetail._id}</p>
                 <br />
-                <p>Full name: {dataDetail.fullName}</p>
+                <p>Tiêu đề: {dataDetail.mainText}</p>
                 <br />
-                <p>Email: {dataDetail.email}</p>
+                <p>Tác giả: {dataDetail.author}</p>
                 <br />
-                <p>Phone number: {dataDetail.phone}</p>
+                <p>Thể loại: {dataDetail.category}</p>
                 <br />
-                <p>Avatar:</p>
+                <p>Giá tiền: {
+                    new Intl.NumberFormat('vi-VN',
+                        { style: 'currency', currency: 'VND' }).format(dataDetail.price)}
+                </p>
+                <br />
+                <p>Số lượng: {dataDetail.quantity}</p>
+                <br />
+                <p>Đã bán: {dataDetail.sold}</p>
+                <br />
+                <p>Thumbnail:</p>
                 <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
                     marginTop: "10px",
                     height: "100px", width: "150px",
                     border: "1px solid #ccc"
                 }}>
                     <img style={{ height: "100%", width: "100%", objectFit: "contain" }}
-                        src={`${import.meta.env.VITE_BASE_URL}/images/avatar/${dataDetail.avatar}`} />
+                        src={`${import.meta.env.VITE_BASE_URL}/images/book/${dataDetail.thumbnail}`} />
                 </div>
                 <div>
                     <label htmlFor='btnUpload' style={{
@@ -112,7 +114,7 @@ const ViewUserDetail = (props) => {
                         borderRadius: "5px",
                         cursor: "pointer"
                     }}>
-                        Upload Avatar
+                        Upload Book Thumbnail
                     </label>
                     <input
                         type='file' hidden id='btnUpload'
@@ -138,7 +140,7 @@ const ViewUserDetail = (props) => {
                         <Button
                             type='primary'
                             onClick={() => {
-                                handleUpdateUserAvatar()
+                                handleUpdateBookThumbnail()
                             }}
                         >
                             Save</Button>
@@ -152,6 +154,7 @@ const ViewUserDetail = (props) => {
             }
         </Drawer>
     )
+
 }
 
-export default ViewUserDetail;
+export default ViewBookDetail;

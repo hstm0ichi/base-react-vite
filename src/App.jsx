@@ -23,7 +23,7 @@ const App = () => {
 
   const fetchUserInfo = async () => {
     const response = await getAccountAPI();
-    await delay(2000);
+    // await delay(1000);
     if (response.data) {
       setUser(response.data.user);
     }

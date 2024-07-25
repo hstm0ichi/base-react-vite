@@ -75,7 +75,7 @@ const LoginPage = () => {
                             <Input.Password
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") {
-                                        form.submit();
+                                        form.submit()
                                     }
                                 }}
                             />
@@ -87,6 +87,7 @@ const LoginPage = () => {
                                 alignItems: "center"
                             }}>
                                 <Button
+                                    id="loginBtn"
                                     loading={loading}
                                     type="primary"
                                     htmlType="submit"
