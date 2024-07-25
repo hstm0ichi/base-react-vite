@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import { HomeOutlined, BookOutlined, SettingOutlined, LoginOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeOutlined, BookOutlined, SettingOutlined, LoginOutlined, UserOutlined, AliwangwangOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 
@@ -29,27 +29,26 @@ const Header = () => {
             icon: <BookOutlined />,
 
         },
-        {
-            label: 'Cài đặt',
+
+        ...(!user.id ? [{
+            label: <Link to={"/login"}>Đăng nhập</Link>,
+            key: 'login',
+            icon: <LoginOutlined />,
+        }] : []),
+
+        ...(user.id ? [{
+            label: `Welcome ${user.fullName}`,
             key: 'setting',
-            icon: <SettingOutlined />,
+            icon: <AliwangwangOutlined />,
             children: [
-                {
-                    label: <Link to={"/login"}>Đăng nhập</Link>,
-                    key: 'login',
-                    icon: <LoginOutlined />,
-                },
                 {
                     label: 'Đăng xuất',
                     key: 'logout',
-                    icon: <LogoutOutlined />,
                 },
             ],
-
-        }
+        }] : [])
 
     ];
-
     return (
         <Menu
             onClick={onClick}
