@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './style/global.css'
 import {
   createBrowserRouter,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
 import LoginPage from './pages/login.jsx';
 import RegisterPage from './pages/register.jsx';
@@ -13,6 +13,7 @@ import BooksPage from './pages/books.jsx';
 import TodoApp from './components/todo/TodoApp.jsx';
 import ErrorPage from './pages/error.jsx';
 import { AuthWrapper } from './components/context/auth.context.jsx';
+import PrivateRoute from './pages/private.route.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,11 +27,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/users",
-        element: <UsersPage />
+        element: (
+          <PrivateRoute>
+            <UsersPage />
+          </PrivateRoute>
+        )
       },
       {
         path: "/books",
-        element: <BooksPage />
+        element: (
+          <PrivateRoute>
+            <BooksPage />
+          </PrivateRoute>
+        )
       }
     ],
   },
