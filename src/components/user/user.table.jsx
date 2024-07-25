@@ -15,6 +15,7 @@ const UserTable = (props) => {
     const columns = [
         {
             title: "STT",
+            align: "center",
             render: (_, record, index) => {
                 return (
                     <>{(index + 1) + (current - 1) * pageSize}</>

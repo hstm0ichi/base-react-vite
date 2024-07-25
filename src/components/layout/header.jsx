@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
-import { HomeOutlined, AuditOutlined, SettingOutlined, LoginOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { HomeOutlined, BookOutlined, SettingOutlined, LoginOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/auth.context';
 
 const Header = () => {
     const [current, setCurrent] = useState();
+    const { user } = useContext(AuthContext);
+
     const onClick = (e) => {
-        console.log('click ', e);
         setCurrent(e.key);
     };
 
@@ -24,7 +26,7 @@ const Header = () => {
         {
             label: <Link to={"/books"}>Books</Link>,
             key: 'books',
-            icon: <AuditOutlined />,
+            icon: <BookOutlined />,
 
         },
         {

@@ -74,7 +74,7 @@ const ViewUserDetail = (props) => {
         <Drawer
             width={"auto"}
             title="Chi tiết User"
-            style={{ padding: "20px", placeItems: "center" }}
+            style={{ padding: "20px", alignItems: "center" }}
             onClose={() => {
                 setDataDetail(null);
                 setIsDetailOpen(false);
@@ -92,6 +92,9 @@ const ViewUserDetail = (props) => {
                 <br />
                 <p>Avatar:</p>
                 <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                     marginTop: "10px",
                     height: "100px", width: "150px",
                     border: "1px solid #ccc"
