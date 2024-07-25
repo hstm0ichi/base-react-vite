@@ -3,8 +3,9 @@ import { Button, Checkbox, Form, Input, notification, Row, Col, Divider } from '
 import { registerUserAPI } from '../services/api.service';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
-
+import useDocumentTitle from "../services/useDocumentTitle";
 const RegisterPage = () => {
+    useDocumentTitle("Register");
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const onFinish = async (values) => {

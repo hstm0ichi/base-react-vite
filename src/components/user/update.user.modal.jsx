@@ -6,6 +6,7 @@ const UpdateUserModal = (props) => {
     const [id, setId] = useState("");
     const [fullName, setFullName] = useState("");
     const [phone, setPhone] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const { isModalUpdateOpen, setIsModalUpdateOpen,
         dataUpdate, setDataUpdate,
@@ -22,6 +23,7 @@ const UpdateUserModal = (props) => {
     }, [dataUpdate])
 
     const handleSubmitBtn = async () => {
+        setLoading(true);
         const res = await updateUserAPI(id, fullName, phone);
         if (res.data) {
             notification.success({
@@ -37,6 +39,7 @@ const UpdateUserModal = (props) => {
                 description: JSON.stringify(res.message)
             })
         }
+        setLoading(false);
     }
 
     const resetAndCloseModal = () => {
@@ -54,6 +57,7 @@ const UpdateUserModal = (props) => {
             open={isModalUpdateOpen}
             onOk={() => handleSubmitBtn()}
             onCancel={() => resetAndCloseModal()}
+            confirmLoading={loading}
             maskClosable={false}
             okText={"SAVE"}
         >

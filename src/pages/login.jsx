@@ -4,8 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "../services/api.service";
 import { useContext, useState } from "react";
 import { AuthContext } from "../components/context/auth.context";
-
+import useDocumentTitle from "../services/useDocumentTitle";
 const LoginPage = () => {
+    useDocumentTitle("Login");
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();

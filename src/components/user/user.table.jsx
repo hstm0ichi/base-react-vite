@@ -6,7 +6,7 @@ import ViewUserDetail from './view.user.detail';
 import { deleteUserAPI } from "../../services/api.service";
 
 const UserTable = (props) => {
-    const { dataUsers, loadUsers, current, pageSize, total, setCurrent, setPageSize } = props;
+    const { dataUsers, loadUsers, current, pageSize, total, setCurrent, setPageSize, loadingTable } = props;
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
     const [dataDetail, setDataDetail] = useState(null);
@@ -137,6 +137,7 @@ const UserTable = (props) => {
 
                 }
                 onChange={onChange}
+                loading={loadingTable}
             />
             <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}

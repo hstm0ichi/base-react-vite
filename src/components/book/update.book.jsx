@@ -1,4 +1,4 @@
-import { Form, Input, InputNumber, Modal, Select, message, notification } from "antd";
+import { Form, Input, InputNumber, Modal, Select, notification } from "antd";
 import { useEffect, useState } from "react";
 import { handleUploadFile, updateBookAPI } from "../../services/api.service";
 
@@ -10,6 +10,7 @@ const UpdateBook = (props) => {
     } = props;
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const [form] = Form.useForm();
 
@@ -74,7 +75,7 @@ const UpdateBook = (props) => {
     }
 
     const handleSubmitBtn = async (values) => {
-
+        setLoading(true);
         //không có ảnh preview + không có file => return
         if (!selectedFile && !preview) {
             notification.error({
@@ -107,6 +108,8 @@ const UpdateBook = (props) => {
 
         //step 2: update book
         await updateBook(newThumbnail, values);
+
+        setLoading(false);
     }
 
 
@@ -115,6 +118,7 @@ const UpdateBook = (props) => {
             title="Update Book"
             open={isModalUpdateOpen}
             onOk={() => form.submit()}
+            confirmLoading={loading}
             onCancel={() => resetAndCloseModal()}
             maskClosable={false}
             okText={"UPDATE"}

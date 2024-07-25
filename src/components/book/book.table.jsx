@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, message, notification, Popconfirm, Table } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { deleteBookAPI, fetchAllBooksAPI } from "../../services/api.service";
 import ViewBookDetail from "./view.book.detail";
 import CreateBook from "./create.book";
@@ -19,22 +19,24 @@ const BookTable = () => {
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
 
     const [isCreateOpen, setIsCreateOpen] = useState(false);
+    const [loadingTable, setLoadingTable] = useState(false);
 
-
-
-    useEffect(() => {
-        loadBooks();
-    }, [current, pageSize])
-
-    const loadBooks = async () => {
-        const response = await fetchAllBooksAPI(current, pageSize)
+    const loadBooks = useCallback(async () => {
+        setLoadingTable(true)
+        const response = await fetchAllBooksAPI(current, pageSize);
         if (response.data) {
             setDataBooks(response.data.result);
             setCurrent(response.data.meta.current);
             setPageSize(response.data.meta.pageSize);
             setTotal(response.data.meta.total);
         }
-    }
+        setLoadingTable(false)
+    }, [current, pageSize])
+
+    useEffect(() => {
+        loadBooks();
+    }, [loadBooks])
+
 
     const onChange = (pagination, filters, sorter, extra) => {
         // setCurrent, setPageSize
@@ -170,6 +172,7 @@ const BookTable = () => {
                     }
                 }
                 onChange={onChange}
+                loading={loadingTable}
             />
             <ViewBookDetail
                 dataDetail={dataDetail}

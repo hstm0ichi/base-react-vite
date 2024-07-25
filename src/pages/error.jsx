@@ -1,7 +1,8 @@
 import { Link, useRouteError } from "react-router-dom";
 import { Button, Result } from 'antd';
-
+import useDocumentTitle from "../services/useDocumentTitle";
 export default function ErrorPage() {
+    useDocumentTitle("Error");
     const error = useRouteError();
     return (
         <Result

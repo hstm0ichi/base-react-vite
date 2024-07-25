@@ -9,8 +9,10 @@ const UserForm = (props) => {
     const [password, setPassword] = useState();
     const [phone, setPhone] = useState();
     const { loadUsers } = props;
+    const [loading, setLoading] = useState(false);
 
     const handleSubmitBtn = async () => {
+        setLoading(true);
         const res = await createUserAPI(fullName, email, password, phone);
         if (res.data) {
             notification.success({
@@ -25,6 +27,7 @@ const UserForm = (props) => {
                 description: JSON.stringify(res.message)
             })
         }
+        setLoading(false);
     }
 
     const resetAndCloseModal = () => {
@@ -49,6 +52,7 @@ const UserForm = (props) => {
                 open={isModalOpen}
                 onOk={() => handleSubmitBtn()}
                 onCancel={() => resetAndCloseModal()}
+                confirmLoading={loading}
                 maskClosable={false}
                 okText={"Create User"}
             >

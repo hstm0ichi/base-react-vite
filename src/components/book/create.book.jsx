@@ -7,6 +7,7 @@ const CreateBook = (props) => {
         isCreateOpen, setIsCreateOpen, loadBooks
     } = props;
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -35,6 +36,7 @@ const CreateBook = (props) => {
     }
 
     const handleSubmitBtn = async (values) => {
+        setLoading(true);
         if (!selectedFile) {
             notification.error({
                 message: "Error creating book",
@@ -74,6 +76,8 @@ const CreateBook = (props) => {
             })
         }
 
+        setLoading(false);
+
     }
 
     return (
@@ -82,6 +86,7 @@ const CreateBook = (props) => {
             open={isCreateOpen}
             height={"auto"}
             onOk={() => form.submit()}
+            confirmLoading={loading}
             onCancel={() => resetAndCloseModal()}
             maskClosable={false}
             okText={"CREATE"}
