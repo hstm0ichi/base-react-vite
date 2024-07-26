@@ -26,8 +26,8 @@ const BookTable = () => {
         const response = await fetchAllBooksAPI(current, pageSize);
         if (response.data) {
             setDataBooks(response.data.result);
-            setCurrent(response.data.meta.current);
-            setPageSize(response.data.meta.pageSize);
+            // setCurrent(response.data.meta.current);
+            // setPageSize(response.data.meta.pageSize);
             setTotal(response.data.meta.total);
         }
         setLoadingTable(false)
